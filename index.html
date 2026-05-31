@@ -3,31 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر A1PLUS | معدات السلامة</title>
+    <title>متجر A1PLUS | طلبات متعددة</title>
     <style>
         :root { --primary: #ffcc00; --bg: #000; --card: #121212; --white: #fff; }
-        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; padding-bottom: 100px; }
         header { text-align: center; padding: 30px; }
         .logo { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 28px; font-weight: bold; color: var(--primary); }
-        
-        .nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .tab { background: #222; color: #fff; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; }
-        .tab.active { background: var(--primary); color: #000; font-weight: bold; }
-
         .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 0 5%; }
         .card { background: var(--card); border-radius: 15px; padding: 20px; text-align: center; border: 1px solid #222; }
-        
-        .img-box { background: #fff; height: 200px; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .img-box { background: #fff; height: 180px; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .img-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
-
-        .qty-box { display: flex; justify-content: center; align-items: center; gap: 20px; background: #1a1a1a; border: 1px solid var(--primary); padding: 8px; border-radius: 8px; width: fit-content; margin: 15px auto; }
-        .q-btn { background: none; border: none; color: var(--primary); font-size: 24px; cursor: pointer; font-weight: bold; width: 40px; }
-        .q-val { font-size: 20px; font-weight: bold; min-width: 40px; }
-
+        .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; background: #1a1a1a; border: 1px solid var(--primary); padding: 5px; border-radius: 8px; width: fit-content; margin: 10px auto; }
+        .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; width: 35px; }
         select { background: #222; color: #fff; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; width: 100%; margin-bottom: 10px; }
+        .add-btn { background: var(--primary); color: #000; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
         
-        .order-btn { background: #25d366; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
-        .hint { font-size: 12px; margin-top: 5px; font-weight: bold; }
+        /* شريط السلة السفلي */
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 2px solid var(--primary); padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+        .cart-info { font-size: 14px; }
+        .send-all-btn { background: #25d366; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -35,77 +29,83 @@
 <header>
     <div class="logo">A1</div>
     <h1>A1PLUS</h1>
-    <p style="color: #888;">للطلب المباشر: 0534107070</p>
+    <p>أضف المنتجات والمقاسات ثم اطلبها دفعة واحدة</p>
 </header>
 
-<div class="nav">
-    <button class="tab active" onclick="filter('all')">الكل</button>
-    <button class="tab" onclick="filter('clothing')">السترات والملابس</button>
-    <button class="tab" onclick="filter('gloves')">الأحذية والقفازات</button>
-</div>
-
 <div class="container">
-    <div class="card" data-cat="clothing">
-        <div class="img-box"><img src="vest-007.png" alt="صدرية"></div>
+    <div class="card">
+        <div class="img-box"><img src="vest-007.png"></div>
         <h3 class="p-name">صدرية سلامة عاكسة 007</h3>
         <select class="p-size">
             <option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
-            <option value="2XL">2XL</option><option value="3XL">3XL</option><option value="4XL">4XL</option>
-            <option value="5XL">5XL</option>
+            <option value="2XL">2XL</option><option value="3XL">3XL</option><option value="4XL">4XL</option><option value="5XL">5XL</option>
         </select>
         <div class="qty-box">
-            <button class="q-btn" onclick="modifyQty(this, 1, 1)">+</button>
+            <button class="q-btn" onclick="modify(this, 1, 1)">+</button>
             <span class="q-val">1</span>
-            <button class="q-btn" onclick="modifyQty(this, -1, 1)">-</button>
+            <button class="q-btn" onclick="modify(this, -1, 1)">-</button>
         </div>
-        <p class="hint" style="color:#44ff44">البيع بالحبة</p>
-        <button class="order-btn" onclick="sendOrder(this)">طلب عبر الواتساب</button>
+        <button class="add-btn" onclick="addToCart(this)">إضافة للطلبية</button>
     </div>
 
-    <div class="card" data-cat="gloves">
-        <div class="img-box"><img src="cotton-gloves.png" alt="قفازات"></div>
+    <div class="card">
+        <div class="img-box"><img src="cotton-gloves.png"></div>
         <h3 class="p-name">قفازات قطنية A1+</h3>
-        <div style="height: 48px;"></div> <div class="qty-box">
-            <button class="q-btn" onclick="modifyQty(this, 10, 10)">+</button>
+        <div style="height: 48px;"></div>
+        <div class="qty-box">
+            <button class="q-btn" onclick="modify(this, 10, 10)">+</button>
             <span class="q-val">10</span>
-            <button class="q-btn" onclick="modifyQty(this, -10, 10)">-</button>
+            <button class="q-btn" onclick="modify(this, -10, 10)">-</button>
         </div>
-        <p class="hint" style="color:#ff4444">الشد 10 حبة إجباري</p>
-        <button class="order-btn" onclick="sendOrder(this)">طلب عبر الواتساب</button>
+        <button class="add-btn" onclick="addToCart(this)">إضافة للطلبية</button>
     </div>
 </div>
 
+<div class="cart-bar" id="cartBar" style="display: none;">
+    <div class="cart-info">تم إضافة <span id="cartCount">0</span> أصناف للطلبية</div>
+    <button class="send-all-btn" onclick="sendFullOrder()">إرسال الطلبية كاملة عبر واتساب</button>
+</div>
+
 <script>
-    // 1. وظيفة تحديث الكمية
-    function modifyQty(btn, amount, minVal) {
+    let cart = [];
+
+    function modify(btn, amount, min) {
         const display = btn.parentElement.querySelector('.q-val');
         let current = parseInt(display.innerText);
-        if (current + amount >= minVal) {
-            display.innerText = current + amount;
-        }
+        if (current + amount >= min) display.innerText = current + amount;
     }
 
-    // 2. وظيفة إرسال الطلب للواتساب
-    function sendOrder(btn) {
+    function addToCart(btn) {
         const card = btn.closest('.card');
         const name = card.querySelector('.p-name').innerText;
         const qty = card.querySelector('.q-val').innerText;
         const sizeEl = card.querySelector('.p-size');
-        const size = sizeEl ? sizeEl.value : "بدون مقاس";
+        const size = sizeEl ? sizeEl.value : "جملة";
+
+        cart.push({ name, size, qty });
         
-        const text = `طلب من متجر A1PLUS:\nالمنتج: ${name}\nالمقاس: ${size}\nالكمية: ${qty}`;
-        const url = `https://wa.me/966534107070?text=${encodeURIComponent(text)}`;
-        window.open(url, '_blank');
+        // تحديث شريط السلة السفلي
+        document.getElementById('cartBar').style.display = 'flex';
+        document.getElementById('cartCount').innerText = cart.length;
+        
+        btn.innerText = "✓ تمت الإضافة";
+        setTimeout(() => btn.innerText = "إضافة للطلبية", 1000);
     }
 
-    // 3. وظيفة الفلترة
-    function filter(cat) {
-        document.querySelectorAll('.card').forEach(c => {
-            c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+    function sendFullOrder() {
+        if (cart.length === 0) return;
+        
+        let message = "طلب جديد من متجر A1PLUS:\n";
+        cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.name} | مقاس: ${item.size} | كمية: ${item.qty}\n`;
         });
-        document.querySelectorAll('.tab').forEach(t => {
-            t.classList.toggle('active', t.innerText.includes(cat) || (cat==='all' && t.innerText==='الكل'));
-        });
+        
+        const url = `https://wa.me/966534107070?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+        
+        // مسح السلة بعد الطلب
+        cart = [];
+        document.getElementById('cartBar').style.display = 'none';
     }
 </script>
 </body>
