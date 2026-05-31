@@ -5,24 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر A1PLUS | السلامة المهنية</title>
     <style>
-        :root { --primary: #ffcc00; --bg: #000; --card-bg: #121212; --text-white: #fff; }
-        body { background-color: var(--bg); color: var(--text-white); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
-        header { text-align: center; padding: 30px 20px; }
-        .logo-circle { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 28px; font-weight: bold; color: var(--primary); }
-        
-        .categories-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-        .tab-btn { background: #222; color: #fff; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
-        .tab-btn.active { background: var(--primary); color: #000; font-weight: bold; }
+        :root {
+            --primary: #ffcc00; 
+            --bg: #000000;
+            --card-bg: #121212;
+            --text-white: #ffffff;
+        }
 
-        .products-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 0 5%; }
-        .product-card { background: var(--card-bg); border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #222; display: block; }
-        
-        .product-image { background: #fff; height: 180px; border-radius: 8px; margin-bottom: 12px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .product-image img { width: 100%; height: 100%; object-fit: contain; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-        .quantity-box { display: flex; justify-content: center; align-items: center; gap: 15px; background: #1a1a1a; border: 1px solid var(--primary); padding: 5px 12px; border-radius: 5px; width: fit-content; margin: 10px auto; }
-        .q-btn { background: none; border: none; color: var(--primary); font-size: 20px; cursor: pointer; }
-        .force-text { color: #ff4444; font-size: 11px; margin-top: 5px; }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* تنسيق الأقسام - Tabs */
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            background-color: #222;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: black;
+            font-weight: bold;
+        }
+
+        /* شبكة المنتجات */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 0 5%;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #222;
+        }
+
+        .product-image {
+            background-color: white;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .quantity-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background: #1a1a1a;
+            border: 1px solid var(--primary);
+            padding: 5px 15px;
+            border-radius: 5px;
+            width: fit-content;
+            margin: 10px auto;
+        }
+
+        .q-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 22px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .force-text {
+            color: #ff4444;
+            font-size: 12px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -30,46 +137,51 @@
     <header>
         <div class="logo-circle">A1</div>
         <h1>A1PLUS</h1>
-        <p style="color: #888;">معدات السلامة المهنية - نظام البيع بالجملة</p>
+        <p style="color: #888;">خيارك الأول لمعدات السلامة المهنية</p>
     </header>
 
     <div class="categories-nav">
         <button class="tab-btn active" onclick="filter('all')">الكل</button>
-        <button class="tab-btn" onclick="filter('gloves')">الاحذيه والقفازات</button>
-        <button class="tab-btn" onclick="filter('vests')">السترات والملابس</button>
+        <button class="tab-btn" onclick="filter('clothing')">السترات والملابس</button>
+        <button class="tab-btn" onclick="filter('helmets')">الخوذ والأقنعة</button>
+        <button class="tab-btn" onclick="filter('gloves')">الأحذية والقفازات</button>
+        <button class="tab-btn" onclick="filter('fire')">أنظمة الإطفاء</button>
     </div>
 
     <div class="products-container" id="grid">
-        <div class="product-card" data-type="gloves">
-            <div class="product-image">
-                <img src="cotton-gloves.png" alt="قفازات قطنية">
-            </div>
-            <h3>قفازات قطنية A1+</h3>
-            <div class="quantity-box">
-                <button class="q-btn" onclick="changeQty(this, 10)">+</button>
-                <span class="quantity-value">10</span>
-                <button class="q-btn" onclick="changeQty(this, -10)">-</button>
-            </div>
-            <div class="force-text">الشد 10 حبة إجباري</div>
-        </div>
-
-        <div class="product-card" data-type="vests">
+        
+        <div class="product-card" data-category="clothing">
             <div class="product-image">
                 <img src="vest-007.png" alt="صدرية سلامة">
             </div>
-            <h3>صدرية سلامة عاكسة 007</h3>
-            <p style="font-size: 11px; color: #aaa;">CODE: A1+ CE EN471 007</p>
+            <h3 class="product-title">صدرية سلامة عاكسة 007</h3>
+            <p style="font-size: 12px; color: #aaa;">CODE: A1+ 007</p>
             <div class="quantity-box">
                 <button class="q-btn" onclick="changeQty(this, 10)">+</button>
                 <span class="quantity-value">10</span>
                 <button class="q-btn" onclick="changeQty(this, -10)">-</button>
             </div>
-            <div class="force-text">الشد 10 حبة إجباري</div>
+            <p class="force-text">الشد 10 حبة إجباري</p>
         </div>
+
+        <div class="product-card" data-category="gloves">
+            <div class="product-image">
+                <img src="cotton-gloves.png" alt="قفازات قطنية">
+            </div>
+            <h3 class="product-title">قفازات قطنية A1+</h3>
+            <p style="font-size: 12px; color: #aaa;">BRAND: A1+</p>
+            <div class="quantity-box">
+                <button class="q-btn" onclick="changeQty(this, 10)">+</button>
+                <span class="quantity-value">10</span>
+                <button class="q-btn" onclick="changeQty(this, -10)">-</button>
+            </div>
+            <p class="force-text">الشد 10 حبة إجباري</p>
+        </div>
+
     </div>
 
     <script>
-        // وظيفة تغيير الكمية بمضاعفات 10
+        // وظيفة التحكم بالكمية (مضاعفات 10)
         function changeQty(btn, val) {
             const span = btn.parentElement.querySelector('.quantity-value');
             let current = parseInt(span.textContent);
@@ -79,15 +191,15 @@
         }
 
         // وظيفة تصفية المنتجات حسب القسم
-        function filter(type) {
+        function filter(category) {
             const cards = document.querySelectorAll('.product-card');
             const buttons = document.querySelectorAll('.tab-btn');
             
-            buttons.forEach(b => b.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
             cards.forEach(card => {
-                if (type === 'all' || card.getAttribute('data-type') === type) {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
