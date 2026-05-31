@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر A1PLUS | نظام طلبات الشراء</title>
+    <title>متجر A1PLUS | نظام طلبات PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root { --primary: #ffcc00; --bg: #000; --card: #121212; --white: #fff; }
-        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 100px; }
+        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 120px; }
         header { text-align: center; padding: 20px; border-bottom: 1px solid #333; }
         .logo { width: 70px; height: 70px; border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 24px; font-weight: bold; color: var(--primary); }
         .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px 5%; }
@@ -14,13 +15,21 @@
         .img-box { background: #fff; height: 180px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
         .img-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
         .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; background: #1a1a1a; border: 1px solid var(--primary); padding: 5px; border-radius: 8px; width: fit-content; margin: 10px auto; }
-        .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; width: 35px; font-weight: bold; }
+        .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; width: 35px; }
         select { background: #222; color: #fff; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; width: 100%; margin-bottom: 10px; }
         .add-btn { background: var(--primary); color: #000; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
         
-        /* شريط السلة السفلي الاحترافي */
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 3px solid var(--primary); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.5); z-index: 1000; }
-        .send-all-btn { background: #25d366; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        /* شريط السلة السفلي */
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 3px solid var(--primary); padding: 15px; display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+        .btn-pdf { background: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-wa { background: #25d366; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        /* تنسيق الفاتورة (مخفي في الصفحة ويظهر في PDF) */
+        #invoice-template { display: none; padding: 40px; color: #000; background: #fff; font-family: 'Arial', sans-serif; }
+        .inv-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 20px; }
+        .inv-table { width: 100%; border-collapse: collapse; margin-top: 30px; }
+        .inv-table th, .inv-table td { border: 1px solid #ddd; padding: 12px; text-align: right; }
+        .inv-table th { background: #f2f2f2; }
     </style>
 </head>
 <body>
@@ -28,98 +37,29 @@
 <header>
     <div class="logo">A1</div>
     <h1>A1PLUS</h1>
-    <p style="color: var(--primary);">نموذج طلب شراء الكتروني</p>
+    <p>معدات السلامة المهنية</p>
 </header>
 
 <div class="container">
     <div class="card">
-        <div class="img-box"><img src="vest-007.png" alt="صدرية"></div>
+        <div class="img-box"><img src="vest-007.png"></div>
         <h3 class="p-name">صدرية سلامة عاكسة 007</h3>
         <select class="p-size">
-            <option value="M">مقاس: M</option><option value="L">مقاس: L</option><option value="XL">مقاس: XL</option>
-            <option value="2XL">مقاس: 2XL</option><option value="3XL">مقاس: 3XL</option><option value="4XL">مقاس: 4XL</option><option value="5XL">مقاس: 5XL</option>
+            <option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option><option>4XL</option><option>5XL</option>
         </select>
         <div class="qty-box">
             <button class="q-btn" onclick="modify(this, 1, 1)">+</button>
             <span class="q-val">1</span>
             <button class="q-btn" onclick="modify(this, -1, 1)">-</button>
         </div>
-        <button class="add-btn" onclick="addToCart(this)">إضافة إلى سلة الشراء</button>
+        <button class="add-btn" onclick="addToCart(this)">إضافة للطلب</button>
     </div>
 
     <div class="card">
-        <div class="img-box"><img src="cotton-gloves.png" alt="قفازات"></div>
+        <div class="img-box"><img src="cotton-gloves.png"></div>
         <h3 class="p-name">قفازات قطنية A1+</h3>
         <div style="height: 48px;"></div>
         <div class="qty-box">
             <button class="q-btn" onclick="modify(this, 10, 10)">+</button>
             <span class="q-val">10</span>
-            <button class="q-btn" onclick="modify(this, -10, 10)">-</button>
-        </div>
-        <button class="add-btn" onclick="addToCart(this)">إضافة إلى سلة الشراء</button>
-    </div>
-</div>
-
-<div class="cart-bar" id="cartBar" style="display: none;">
-    <div>أصناف في السلة: <strong id="cartCount" style="color: var(--primary);">0</strong></div>
-    <button class="send-all-btn" onclick="sendFullOrder()">إرسال طلب الشراء 📄</button>
-</div>
-
-<script>
-    let cart = [];
-
-    function modify(btn, amount, min) {
-        const display = btn.parentElement.querySelector('.q-val');
-        let current = parseInt(display.innerText);
-        if (current + amount >= min) display.innerText = current + amount;
-    }
-
-    function addToCart(btn) {
-        const card = btn.closest('.card');
-        const name = card.querySelector('.p-name').innerText;
-        const qty = card.querySelector('.q-val').innerText;
-        const sizeEl = card.querySelector('.p-size');
-        const size = sizeEl ? sizeEl.value : "جملة (بدون مقاس)";
-
-        cart.push({ name, size, qty });
-        
-        document.getElementById('cartBar').style.display = 'flex';
-        document.getElementById('cartCount').innerText = cart.length;
-        
-        btn.innerText = "✓ تمت الإضافة";
-        btn.style.background = "#44ff44";
-        setTimeout(() => {
-            btn.innerText = "إضافة إلى سلة الشراء";
-            btn.style.background = "var(--primary)";
-        }, 800);
-    }
-
-    function sendFullOrder() {
-        if (cart.length === 0) return;
-        
-        // بناء رسالة طلب الشراء برمجياً
-        let purchaseOrder = "📄 *طلب شراء جديد - متجر A1PLUS*\n";
-        purchaseOrder += "------------------------------------------\n";
-        purchaseOrder += `التاريخ: ${new Date().toLocaleDateString('ar-SA')}\n`;
-        purchaseOrder += "------------------------------------------\n\n";
-        
-        cart.forEach((item, index) => {
-            purchaseOrder += `*(${index + 1})*\n`;
-            purchaseOrder += `📦 *الصنف:* ${item.name}\n`;
-            purchaseOrder += `📏 *المقاس:* ${item.size}\n`;
-            purchaseOrder += `🔢 *الكمية:* ${item.qty}\n`;
-            purchaseOrder += "------------------\n";
-        });
-        
-        purchaseOrder += "\n✅ *يرجى تأكيد استلام الطلب وتزويدنا بالسعر الإجمالي.*";
-        
-        const url = `https://wa.me/966534107070?text=${encodeURIComponent(purchaseOrder)}`;
-        window.open(url, '_blank');
-        
-        // مسح السلة بعد إرسال طلب الشراء
-        cart = [];
-        document.getElementById('cartBar').style.display = 'none';
-    }
-</script>
-</body>
-</html>
+            <button class="q-btn" onclick="modify(this, -
