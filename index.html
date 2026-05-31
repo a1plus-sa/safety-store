@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر TOP GIVING | السلامة المهنية</title>
+    <style>
+        :root {
+            --primary: #ffcc00; /* اللون الأصفر الذهبي */
+            --bg: #000000;
+            --card-bg: #121212;
+            --text-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-white);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* تنسيق الأقسام - Tabs */
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            background-color: #222;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: black;
+            font-weight: bold;
+        }
+
+        /* شبكة المنتجات */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            padding: 0 5%;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #222;
+        }
+
+        .product-image {
+            background-color: white;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .quantity-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background: #1a1a1a;
+            border: 1px solid var(--primary);
+            padding: 5px 15px;
+            border-radius: 5px;
+            width: fit-content;
+            margin: 15px auto;
+        }
+
+        .q-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 22px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-circle">TG</div>
+        <h1>TOP GIVING</h1>
+        <p style="color: #888;">معدات السلامة المهنية والحماية</p>
+    </header>
+
+    <div class="categories-nav">
+        <button class="tab-btn active">الكل</button>
+        <button class="tab-btn">السترات والملابس</button>
+        <button class="tab-btn">الخوذه والاقنعه</button>
+        <button class="tab-btn">الاحذيه والقفاوات</button>
+        <button class="tab-btn">أنظمة السلامة والاطفاء</button>
+        <button class="tab-btn">الاسعافات والحماية</button>
+    </div>
+
+    <div class="products-container">
+        <div class="product-card">
+            <div class="product-image">صورة الأداة</div>
+            <h3 class="product-title">منتج سلامة 01</h3>
+            <div class="quantity-box">
+                <button class="q-btn">+</button>
+                <span>16</span>
+                <button class="q-btn">-</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-image">صورة الأداة</div>
+            <h3 class="product-title">منتج سلامة 02</h3>
+            <div class="quantity-box">
+                <button class="q-btn">+</button>
+                <span>16</span>
+                <button class="q-btn">-</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
