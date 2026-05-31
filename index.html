@@ -5,113 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>متجر A1PLUS | السلامة المهنية</title>
     <style>
-        :root {
-            --primary: #ffcc00; /* الأصفر الذهبي المميز */
-            --bg: #000000;
-            --card-bg: #121212;
-            --text-white: #ffffff;
-        }
+        :root { --primary: #ffcc00; --bg: #000000; --card-bg: #121212; --text-white: #ffffff; }
+        body { background-color: var(--bg); color: var(--text-white); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        header { text-align: center; padding: 40px 20px; }
+        .logo-circle { width: 90px; height: 90px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 32px; font-weight: bold; color: var(--primary); }
+        
+        .categories-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+        .tab-btn { background-color: #222; color: white; border: none; padding: 10px 25px; border-radius: 25px; cursor: pointer; transition: 0.3s; }
+        .tab-btn.active { background-color: var(--primary); color: black; font-weight: bold; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text-white);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+        .products-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 0 5%; }
+        .product-card { background-color: var(--card-bg); border-radius: 15px; padding: 20px; text-align: center; border: 1px solid #222; }
+        
+        /* ربط الصورة المرفوعة */
+        .product-image { background-color: white; height: 200px; border-radius: 10px; margin-bottom: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .product-image img { width: 100%; height: auto; object-fit: contain; }
 
-        header {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        /* تعديل الشعار ليناسب A1PLUS */
-        .logo-circle {
-            width: 90px;
-            height: 90px;
-            border: 3px solid var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 32px;
-            font-weight: bold;
-            color: var(--primary);
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
-        }
-
-        .categories-nav {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 40px;
-        }
-
-        .tab-btn {
-            background-color: #222;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            background-color: var(--primary);
-            color: black;
-            font-weight: bold;
-        }
-
-        .products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-            padding: 0 5%;
-        }
-
-        .product-card {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #222;
-        }
-
-        .product-image {
-            background-color: white;
-            height: 200px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-weight: bold;
-        }
-
-        .quantity-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            background: #1a1a1a;
-            border: 1px solid var(--primary);
-            padding: 5px 15px;
-            border-radius: 5px;
-            width: fit-content;
-            margin: 15px auto;
-        }
-
-        .q-btn {
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-size: 22px;
-            cursor: pointer;
-        }
+        .quantity-box { display: flex; justify-content: center; align-items: center; gap: 20px; background: #1a1a1a; border: 1px solid var(--primary); padding: 5px 15px; border-radius: 5px; width: fit-content; margin: 15px auto; }
+        .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; user-select: none; }
+        .force-text { color: #ff4444; font-size: 12px; margin-top: 5px; }
     </style>
 </head>
 <body>
@@ -119,29 +31,49 @@
     <header>
         <div class="logo-circle">A1</div>
         <h1>A1PLUS</h1>
-        <p style="color: #888;">خيارك الأول لمعدات السلامة المهنية</p>
+        <p style="color: #888;">معدات السلامة المهنية - البيع بالشد (10 حبات)</p>
     </header>
 
     <div class="categories-nav">
         <button class="tab-btn active">الكل</button>
+        <button class="tab-btn">الاحذيه والقفازات</button>
         <button class="tab-btn">السترات والملابس</button>
-        <button class="tab-btn">الخوذ والأقنعة</button>
-        <button class="tab-btn">الأحذية والقفازات</button>
-        <button class="tab-btn">أنظمة الإطفاء</button>
-        <button class="tab-btn">الإسعافات الأولية</button>
+        <button class="tab-btn">الخوذه والاقنعه</button>
     </div>
 
     <div class="products-container">
         <div class="product-card">
-            <div class="product-image">A1 PLUS SAFETY</div>
-            <h3>سترة سلامة عاكسة</h3>
-            <div class="quantity-box">
-                <button class="q-btn">+</button>
-                <span>0</span>
-                <button class="q-btn">-</button>
+            <div class="product-image">
+                <img src="cotton-gloves.png" alt="قفازات قطنية A1PLUS">
             </div>
+            <h3>قفازات قطنية - BRAND:A1+</h3>
+            <div class="quantity-box">
+                <button class="q-btn plus-btn">+</button>
+                <span class="quantity-value">10</span>
+                <button class="q-btn minus-btn">-</button>
+            </div>
+            <div class="force-text">* الشد 10 حبات إجباري</div>
         </div>
     </div>
 
+    <script>
+        document.querySelectorAll('.product-card').forEach(card => {
+            const plusBtn = card.querySelector('.plus-btn');
+            const minusBtn = card.querySelector('.minus-btn');
+            const qtyValue = card.querySelector('.quantity-value');
+
+            plusBtn.addEventListener('click', () => {
+                let currentQty = parseInt(qtyValue.textContent);
+                qtyValue.textContent = currentQty + 10; // زيادة بمقدار 10
+            });
+
+            minusBtn.addEventListener('click', () => {
+                let currentQty = parseInt(qtyValue.textContent);
+                if (currentQty > 10) { // لا يسمح بأقل من 10
+                    qtyValue.textContent = currentQty - 10; // نقص بمقدار 10
+                }
+            });
+        });
+    </script>
 </body>
 </html>
