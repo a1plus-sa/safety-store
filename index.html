@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر A1PLUS | طلبات متعددة</title>
+    <title>متجر A1PLUS | نظام طلبات الشراء</title>
     <style>
         :root { --primary: #ffcc00; --bg: #000; --card: #121212; --white: #fff; }
-        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; padding-bottom: 100px; }
-        header { text-align: center; padding: 30px; }
-        .logo { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 28px; font-weight: bold; color: var(--primary); }
-        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 0 5%; }
-        .card { background: var(--card); border-radius: 15px; padding: 20px; text-align: center; border: 1px solid #222; }
-        .img-box { background: #fff; height: 180px; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 100px; }
+        header { text-align: center; padding: 20px; border-bottom: 1px solid #333; }
+        .logo { width: 70px; height: 70px; border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 24px; font-weight: bold; color: var(--primary); }
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px 5%; }
+        .card { background: var(--card); border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #222; }
+        .img-box { background: #fff; height: 180px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
         .img-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
         .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; background: #1a1a1a; border: 1px solid var(--primary); padding: 5px; border-radius: 8px; width: fit-content; margin: 10px auto; }
-        .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; width: 35px; }
+        .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; width: 35px; font-weight: bold; }
         select { background: #222; color: #fff; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; width: 100%; margin-bottom: 10px; }
         .add-btn { background: var(--primary); color: #000; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
         
-        /* شريط السلة السفلي */
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 2px solid var(--primary); padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .cart-info { font-size: 14px; }
-        .send-all-btn { background: #25d366; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        /* شريط السلة السفلي الاحترافي */
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 3px solid var(--primary); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.5); z-index: 1000; }
+        .send-all-btn { background: #25d366; color: #fff; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; }
     </style>
 </head>
 <body>
@@ -29,27 +28,27 @@
 <header>
     <div class="logo">A1</div>
     <h1>A1PLUS</h1>
-    <p>أضف المنتجات والمقاسات ثم اطلبها دفعة واحدة</p>
+    <p style="color: var(--primary);">نموذج طلب شراء الكتروني</p>
 </header>
 
 <div class="container">
     <div class="card">
-        <div class="img-box"><img src="vest-007.png"></div>
+        <div class="img-box"><img src="vest-007.png" alt="صدرية"></div>
         <h3 class="p-name">صدرية سلامة عاكسة 007</h3>
         <select class="p-size">
-            <option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
-            <option value="2XL">2XL</option><option value="3XL">3XL</option><option value="4XL">4XL</option><option value="5XL">5XL</option>
+            <option value="M">مقاس: M</option><option value="L">مقاس: L</option><option value="XL">مقاس: XL</option>
+            <option value="2XL">مقاس: 2XL</option><option value="3XL">مقاس: 3XL</option><option value="4XL">مقاس: 4XL</option><option value="5XL">مقاس: 5XL</option>
         </select>
         <div class="qty-box">
             <button class="q-btn" onclick="modify(this, 1, 1)">+</button>
             <span class="q-val">1</span>
             <button class="q-btn" onclick="modify(this, -1, 1)">-</button>
         </div>
-        <button class="add-btn" onclick="addToCart(this)">إضافة للطلبية</button>
+        <button class="add-btn" onclick="addToCart(this)">إضافة إلى سلة الشراء</button>
     </div>
 
     <div class="card">
-        <div class="img-box"><img src="cotton-gloves.png"></div>
+        <div class="img-box"><img src="cotton-gloves.png" alt="قفازات"></div>
         <h3 class="p-name">قفازات قطنية A1+</h3>
         <div style="height: 48px;"></div>
         <div class="qty-box">
@@ -57,13 +56,13 @@
             <span class="q-val">10</span>
             <button class="q-btn" onclick="modify(this, -10, 10)">-</button>
         </div>
-        <button class="add-btn" onclick="addToCart(this)">إضافة للطلبية</button>
+        <button class="add-btn" onclick="addToCart(this)">إضافة إلى سلة الشراء</button>
     </div>
 </div>
 
 <div class="cart-bar" id="cartBar" style="display: none;">
-    <div class="cart-info">تم إضافة <span id="cartCount">0</span> أصناف للطلبية</div>
-    <button class="send-all-btn" onclick="sendFullOrder()">إرسال الطلبية كاملة عبر واتساب</button>
+    <div>أصناف في السلة: <strong id="cartCount" style="color: var(--primary);">0</strong></div>
+    <button class="send-all-btn" onclick="sendFullOrder()">إرسال طلب الشراء 📄</button>
 </div>
 
 <script>
@@ -80,30 +79,44 @@
         const name = card.querySelector('.p-name').innerText;
         const qty = card.querySelector('.q-val').innerText;
         const sizeEl = card.querySelector('.p-size');
-        const size = sizeEl ? sizeEl.value : "جملة";
+        const size = sizeEl ? sizeEl.value : "جملة (بدون مقاس)";
 
         cart.push({ name, size, qty });
         
-        // تحديث شريط السلة السفلي
         document.getElementById('cartBar').style.display = 'flex';
         document.getElementById('cartCount').innerText = cart.length;
         
         btn.innerText = "✓ تمت الإضافة";
-        setTimeout(() => btn.innerText = "إضافة للطلبية", 1000);
+        btn.style.background = "#44ff44";
+        setTimeout(() => {
+            btn.innerText = "إضافة إلى سلة الشراء";
+            btn.style.background = "var(--primary)";
+        }, 800);
     }
 
     function sendFullOrder() {
         if (cart.length === 0) return;
         
-        let message = "طلب جديد من متجر A1PLUS:\n";
+        // بناء رسالة طلب الشراء برمجياً
+        let purchaseOrder = "📄 *طلب شراء جديد - متجر A1PLUS*\n";
+        purchaseOrder += "------------------------------------------\n";
+        purchaseOrder += `التاريخ: ${new Date().toLocaleDateString('ar-SA')}\n`;
+        purchaseOrder += "------------------------------------------\n\n";
+        
         cart.forEach((item, index) => {
-            message += `${index + 1}. ${item.name} | مقاس: ${item.size} | كمية: ${item.qty}\n`;
+            purchaseOrder += `*(${index + 1})*\n`;
+            purchaseOrder += `📦 *الصنف:* ${item.name}\n`;
+            purchaseOrder += `📏 *المقاس:* ${item.size}\n`;
+            purchaseOrder += `🔢 *الكمية:* ${item.qty}\n`;
+            purchaseOrder += "------------------\n";
         });
         
-        const url = `https://wa.me/966534107070?text=${encodeURIComponent(message)}`;
+        purchaseOrder += "\n✅ *يرجى تأكيد استلام الطلب وتزويدنا بالسعر الإجمالي.*";
+        
+        const url = `https://wa.me/966534107070?text=${encodeURIComponent(purchaseOrder)}`;
         window.open(url, '_blank');
         
-        // مسح السلة بعد الطلب
+        // مسح السلة بعد إرسال طلب الشراء
         cart = [];
         document.getElementById('cartBar').style.display = 'none';
     }
