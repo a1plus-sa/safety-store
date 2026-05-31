@@ -3,54 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر A1PLUS | السلامة المهنية</title>
+    <title>متجر A1PLUS | معدات السلامة</title>
     <style>
-        :root { --primary: #ffcc00; --bg: #000; --card-bg: #121212; --text-white: #fff; }
-        body { background-color: var(--bg); color: var(--text-white); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
-        header { text-align: center; padding: 30px 20px; }
-        .logo-circle { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 28px; font-weight: bold; color: var(--primary); }
-        .categories-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-        .tab-btn { background: #222; color: #fff; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; }
-        .tab-btn.active { background: var(--primary); color: #000; font-weight: bold; }
-        .products-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 0 5%; }
-        .product-card { background: var(--card-bg); border-radius: 15px; padding: 20px; text-align: center; border: 1px solid #222; }
-        .product-image { background: #fff; height: 200px; border-radius: 10px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .product-image img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        :root { --primary: #ffcc00; --bg: #000; --card: #121212; --white: #fff; }
+        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        header { text-align: center; padding: 30px; }
+        .logo { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 28px; font-weight: bold; color: var(--primary); }
         
-        .quantity-box { display: flex; justify-content: center; align-items: center; gap: 20px; background: #1a1a1a; border: 1px solid var(--primary); padding: 8px 15px; border-radius: 8px; width: fit-content; margin: 15px auto; }
-        .q-btn { background: none; border: none; color: var(--primary); font-size: 24px; cursor: pointer; font-weight: bold; user-select: none; width: 30px; }
-        .quantity-value { font-size: 20px; font-weight: bold; min-width: 30px; }
+        .nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .tab { background: #222; color: #fff; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; }
+        .tab.active { background: var(--primary); color: #000; font-weight: bold; }
+
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 0 5%; }
+        .card { background: var(--card); border-radius: 15px; padding: 20px; text-align: center; border: 1px solid #222; }
         
-        .order-btn { background-color: #25d366; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px; }
+        .img-box { background: #fff; height: 200px; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .img-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
+
+        .qty-box { display: flex; justify-content: center; align-items: center; gap: 20px; background: #1a1a1a; border: 1px solid var(--primary); padding: 8px; border-radius: 8px; width: fit-content; margin: 15px auto; }
+        .q-btn { background: none; border: none; color: var(--primary); font-size: 24px; cursor: pointer; font-weight: bold; width: 40px; }
+        .q-val { font-size: 20px; font-weight: bold; min-width: 40px; }
+
         select { background: #222; color: #fff; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; width: 100%; margin-bottom: 10px; }
-        .force-text { font-size: 12px; margin-top: 5px; font-weight: bold; }
+        
+        .order-btn { background: #25d366; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        .hint { font-size: 12px; margin-top: 5px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-circle">A1</div>
-        <h1>A1PLUS</h1>
-        <p style="color: #888;">للطلب: 0534107070</p>
-    </header>
+<header>
+    <div class="logo">A1</div>
+    <h1>A1PLUS</h1>
+    <p style="color: #888;">للطلب المباشر: 0534107070</p>
+</header>
 
-    <div class="categories-nav">
-        <button class="tab-btn active" onclick="filter('all')">الكل</button>
-        <button class="tab-btn" onclick="filter('clothing')">السترات والملابس</button>
-        <button class="tab-btn" onclick="filter('gloves')">الأحذية والقفازات</button>
+<div class="nav">
+    <button class="tab active" onclick="filter('all')">الكل</button>
+    <button class="tab" onclick="filter('clothing')">السترات والملابس</button>
+    <button class="tab" onclick="filter('gloves')">الأحذية والقفازات</button>
+</div>
+
+<div class="container">
+    <div class="card" data-cat="clothing">
+        <div class="img-box"><img src="vest-007.png" alt="صدرية"></div>
+        <h3 class="p-name">صدرية سلامة عاكسة 007</h3>
+        <select class="p-size">
+            <option value="M">M</option><option value="L">L</option><option value="XL">XL</option>
+            <option value="2XL">2XL</option><option value="3XL">3XL</option><option value="4XL">4XL</option>
+            <option value="5XL">5XL</option>
+        </select>
+        <div class="qty-box">
+            <button class="q-btn" onclick="modifyQty(this, 1, 1)">+</button>
+            <span class="q-val">1</span>
+            <button class="q-btn" onclick="modifyQty(this, -1, 1)">-</button>
+        </div>
+        <p class="hint" style="color:#44ff44">البيع بالحبة</p>
+        <button class="order-btn" onclick="sendOrder(this)">طلب عبر الواتساب</button>
     </div>
 
-    <div class="products-container">
-        <div class="product-card" data-category="clothing">
-            <div class="product-image"><img src="vest-007.png" alt="صدرية"></div>
-            <h3 class="product-name">صدرية سلامة عاكسة 007</h3>
-            <select class="product-size">
-                <option value="M">مقاس: M</option><option value="L">مقاس: L</option>
-                <option value="XL">مقاس: XL</option><option value="2XL">مقاس: 2XL</option>
-                <option value="3XL">مقاس: 3XL</option><option value="4XL">مقاس: 4XL</option>
-                <option value="5XL">مقاس: 5XL</option>
-            </select>
-            <div class="quantity-box">
-                <button class="q-btn" onclick="updateQty(this, 1, 1)">+</button>
-                <span class="quantity-value">1</span>
-                <button class="q-btn" onclick="updateQty(this, -1, 1
+    <div class="card" data-cat="gloves">
+        <div class="img-box"><img src="cotton-gloves.png" alt="قفازات"></div>
+        <h3 class="p-name">قفازات قطنية A1+</h3>
+        <div style="height: 48px;"></div> <div class="qty-box">
+            <button class="q-btn" onclick="modifyQty(this, 10, 10)">+</button>
+            <span class="q-val">10</span>
+            <button class="q-btn" onclick="modifyQty(this, -10, 10)">-</button>
+        </div>
+        <p class="hint" style="color:#ff4444">الشد 10 حبة إجباري</p>
+        <button class="order-btn" onclick="sendOrder(this)">طلب عبر الواتساب</button>
+    </div>
+</div>
+
+<script>
+    // 1. وظيفة تحديث الكمية
+    function modifyQty(btn, amount, minVal) {
+        const display = btn.parentElement.querySelector('.q-val');
+        let current = parseInt(display.innerText);
+        if (current + amount >= minVal) {
+            display.innerText = current + amount;
+        }
+    }
+
+    // 2. وظيفة إرسال الطلب للواتساب
+    function sendOrder(btn) {
+        const card = btn.closest('.card');
+        const name = card.querySelector('.p-name').innerText;
+        const qty = card.querySelector('.q-val').innerText;
+        const sizeEl = card.querySelector('.p-size');
+        const size = sizeEl ? sizeEl.value : "بدون مقاس";
+        
+        const text = `طلب من متجر A1PLUS:\nالمنتج: ${name}\nالمقاس: ${size}\nالكمية: ${qty}`;
+        const url = `https://wa.me/966534107070?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+    }
+
+    // 3. وظيفة الفلترة
+    function filter(cat) {
+        document.querySelectorAll('.card').forEach(c => {
+            c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+        });
+        document.querySelectorAll('.tab').forEach(t => {
+            t.classList.toggle('active', t.innerText.includes(cat) || (cat==='all' && t.innerText==='الكل'));
+        });
+    }
+</script>
+</body>
+</html>
