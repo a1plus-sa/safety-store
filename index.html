@@ -3,41 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر A1PLUS | نظام عروض الأسعار</title>
+    <title>A1PLUS | نظام عروض الأسعار الآلي</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root { --primary: #ffcc00; --bg: #000; --card: #121212; --white: #fff; }
-        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 150px; }
-        header { text-align: center; padding: 20px; border-bottom: 1px solid #333; }
+        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 160px; }
+        header { text-align: center; padding: 25px; border-bottom: 1px solid #333; }
         .logo { width: 70px; height: 70px; border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 24px; font-weight: bold; color: var(--primary); }
         
         /* حقل اسم العميل */
-        .customer-info { padding: 20px 5%; text-align: center; }
-        .customer-info input { padding: 12px; width: 80%; max-width: 400px; border-radius: 8px; border: 1px solid var(--primary); background: #1a1a1a; color: #fff; text-align: center; font-size: 16px; }
+        .input-section { padding: 20px 5%; text-align: center; background: #0a0a0a; }
+        .input-section input { padding: 15px; width: 85%; max-width: 500px; border-radius: 10px; border: 2px solid var(--primary); background: #1a1a1a; color: #fff; font-size: 16px; text-align: center; }
 
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 10px 5%; }
-        .card { background: var(--card); border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #222; width: 260px; }
-        .img-box { background: #fff; height: 160px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+        .card { background: var(--card); border-radius: 15px; padding: 15px; text-align: center; border: 1px solid #222; width: 270px; }
+        .img-box { background: #fff; height: 180px; border-radius: 10px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .img-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
         .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; background: #1a1a1a; border: 1px solid var(--primary); padding: 5px; border-radius: 8px; width: fit-content; margin: 10px auto; }
         .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; width: 35px; font-weight: bold; }
         
         select { background: #222; color: #fff; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; width: 100%; margin-bottom: 10px; }
-        .add-btn { background: var(--primary); color: #000; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .add-btn { background: var(--primary); color: #000; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .add-btn:hover { background: #e6b800; }
         
-        /* شريط عرض السعر السفلي */
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 3px solid var(--primary); padding: 15px; display: none; flex-direction: column; align-items: center; gap: 10px; z-index: 1000; }
-        .bar-buttons { display: flex; gap: 10px; width: 100%; justify-content: center; }
-        .btn-pdf { background: #e74c3c; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; max-width: 200px; }
-        .btn-wa { background: #25d366; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; max-width: 200px; }
+        /* شريط التحكم السفلي */
+        .footer-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 4px solid var(--primary); padding: 20px; display: none; flex-direction: column; align-items: center; gap: 15px; z-index: 1000; box-shadow: 0 -10px 20px rgba(0,0,0,0.5); }
+        .action-buttons { display: flex; gap: 15px; width: 100%; max-width: 600px; }
+        .btn-finish { background: #25d366; color: #fff; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; flex: 1; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        /* قالب عرض السعر للـ PDF */
-        #quotation-print { display: none; padding: 40px; background: #fff; color: #000; direction: rtl; }
-        .quo-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        /* ستايل عرض السعر (مخفي للـ PDF) */
+        #quotation-template { display: none; padding: 50px; background: #fff; color: #000; direction: rtl; }
+        .quo-title { text-align: center; color: #000; border-bottom: 3px solid #ffcc00; padding-bottom: 15px; margin-bottom: 30px; }
         .quo-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .quo-table th, .quo-table td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        .quo-table th { background: #f8f8f8; }
+        .quo-table th, .quo-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        .quo-table th { background: #f2f2f2; }
     </style>
 </head>
 <body>
@@ -45,11 +45,11 @@
 <header>
     <div class="logo">A1</div>
     <h1>A1PLUS</h1>
-    <p>معدات السلامة المهنية والحماية</p>
+    <p>بوابة عروض الأسعار المعتمدة</p>
 </header>
 
-<div class="customer-info">
-    <input type="text" id="custName" placeholder="أدخل اسم العميل / المؤسسة">
+<div class="input-section">
+    <input type="text" id="customerName" placeholder="اكتب اسم العميل أو الشركة لإصدار العرض باسمهم">
 </div>
 
 <div class="container">
@@ -64,7 +64,7 @@
             <span class="q-val">1</span>
             <button class="q-btn" onclick="changeQty(this, -1, 1)">-</button>
         </div>
-        <button class="add-btn" onclick="addToQuo(this)">إضافة لعرض السعر</button>
+        <button class="add-btn" onclick="addToQuote(this)">إضافة لعرض السعر</button>
     </div>
 
     <div class="card">
@@ -76,105 +76,125 @@
             <span class="q-val">10</span>
             <button class="q-btn" onclick="changeQty(this, -10, 10)">-</button>
         </div>
-        <button class="add-btn" onclick="addToQuo(this)">إضافة لعرض السعر</button>
+        <button class="add-btn" onclick="addToQuote(this)">إضافة لعرض السعر</button>
     </div>
 </div>
 
-<div class="cart-bar" id="cartBar">
-    <div id="cartStatus">تم إضافة أصناف لعرض السعر</div>
-    <div class="bar-buttons">
-        <button class="btn-pdf" onclick="generateQuotation()">تحميل عرض سعر PDF</button>
-        <button class="btn-wa" onclick="sendQuotationWA()">إرسال واتساب</button>
+<div class="footer-bar" id="footerBar">
+    <div style="font-weight: bold; font-size: 14px;">تم اختيار <span id="itemsCount" style="color:var(--primary)">0</span> أصناف</div>
+    <div class="action-buttons">
+        <button class="btn-finish" onclick="processOrder()">إتمام الطلب وإصدار عرض السعر ✅</button>
     </div>
 </div>
 
-<div id="quotation-print">
-    <div class="quo-header">
-        <div>
-            <h2>A1PLUS</h2>
-            <p>لمعدات السلامة المهنية</p>
-            <p>هاتف: 0534107070</p>
-        </div>
-        <div style="text-align: left;">
-            <h3>عرض سعر مبدئي</h3>
-            <p>التاريخ: <span id="q-date"></span></p>
-        </div>
+<div id="quotation-template">
+    <div class="quo-title">
+        <h1>A1PLUS لمعدات السلامة المهنية</h1>
+        <p>هاتف: 0534107070 | بريد: info@a1plus.com</p>
     </div>
-    <div style="margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-        <strong>موجّه إلى السادة: </strong> <span id="q-cust"></span>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+        <div><strong>السادة: </strong> <span id="pdf-cust-name"></span></div>
+        <div><strong>التاريخ: </strong> <span id="pdf-date"></span></div>
     </div>
+    <h3 style="text-align: center; background: #eee; padding: 10px;">عرض سعر مبدئي (Quotation)</h3>
     <table class="quo-table">
         <thead>
             <tr>
-                <th>الرقم</th>
-                <th>اسم الصنف</th>
+                <th>م</th>
+                <th>وصف الصنف</th>
                 <th>المقاس</th>
                 <th>الكمية</th>
             </tr>
         </thead>
-        <tbody id="quo-items"></tbody>
+        <tbody id="pdf-items-body"></tbody>
     </table>
-    <div style="margin-top: 40px; font-size: 12px; color: #555;">
-        <p>* ملاحظة: هذا العرض ساري لمدة 7 أيام من تاريخه.</p>
-        <p>* تخضع الأسعار لتوفر المخزون عند الطلب الفعلي.</p>
+    <div style="margin-top: 40px;">
+        <p><strong>الشروط والأحكام:</strong></p>
+        <ul style="font-size: 13px;">
+            <li>هذا العرض صالح لمدة 10 أيام من تاريخه.</li>
+            <li>الأسعار لا تشمل ضريبة القيمة المضافة إلا إذا ذكر خلاف ذلك.</li>
+        </ul>
     </div>
 </div>
 
 <script>
-    let quotation = [];
+    let quoteItems = [];
 
     function changeQty(btn, val, min) {
-        const display = btn.parentElement.querySelector('.q-val');
-        let current = parseInt(display.innerText);
-        if (current + val >= min) display.innerText = current + val;
+        const span = btn.parentElement.querySelector('.q-val');
+        let current = parseInt(span.textContent);
+        if (current + val >= min) span.textContent = current + val;
     }
 
-    function addToQuo(btn) {
+    function addToQuote(btn) {
         const card = btn.closest('.card');
         const name = card.querySelector('.p-name').innerText;
         const qty = card.querySelector('.q-val').innerText;
-        const sizeEl = card.querySelector('.p-size');
-        const size = sizeEl ? sizeEl.value : "جملة";
+        const sizeSelect = card.querySelector('.p-size');
+        const size = sizeSelect ? sizeSelect.value : "جملة";
 
-        quotation.push({ name, size, qty });
-        document.getElementById('cartBar').style.display = 'flex';
-        
+        quoteItems.push({ name, size, qty });
+        document.getElementById('footerBar').style.display = 'flex';
+        document.getElementById('itemsCount').innerText = quoteItems.length;
+
         btn.innerText = "✓ تمت الإضافة";
-        setTimeout(() => { btn.innerText = "إضافة لعرض السعر"; }, 800);
+        btn.style.background = "#25d366";
+        setTimeout(() => {
+            btn.innerText = "إضافة لعرض السعر";
+            btn.style.background = "var(--primary)";
+        }, 800);
     }
 
-    function generateQuotation() {
-        const customer = document.getElementById('custName').value || "عميل محترم";
-        const body = document.getElementById('quo-items');
-        document.getElementById('q-date').innerText = new Date().toLocaleDateString('ar-SA');
-        document.getElementById('q-cust').innerText = customer;
+    function processOrder() {
+        const customer = document.getElementById('customerName').value || "عميل محترم";
         
+        // 1. إصدار ملف الـ PDF أولاً
+        issuePDF(customer);
+
+        // 2. إرسال الواتساب ثانياً
+        sendWhatsApp(customer);
+
+        // 3. تصفير السلة
+        quoteItems = [];
+        document.getElementById('footerBar').style.display = 'none';
+        alert("تم إصدار عرض السعر وتحميله بنجاح، ويتم الآن توجيهك للواتساب.");
+    }
+
+    function issuePDF(customer) {
+        const body = document.getElementById('pdf-items-body');
+        document.getElementById('pdf-cust-name').innerText = customer;
+        document.getElementById('pdf-date').innerText = new Date().toLocaleDateString('ar-SA');
         body.innerHTML = "";
-        quotation.forEach((item, index) => {
-            body.innerHTML += `<tr><td>${index + 1}</td><td>${item.name}</td><td>${item.size}</td><td>${item.qty}</td></tr>`;
-        });
         
-        const element = document.getElementById('quotation-print');
+        quoteItems.forEach((item, i) => {
+            body.innerHTML += `<tr><td>${i+1}</td><td>${item.name}</td><td>${item.size}</td><td>${item.qty}</td></tr>`;
+        });
+
+        const element = document.getElementById('quotation-template');
         element.style.display = 'block';
-        const opt = { margin: 15, filename: `Quotation_A1PLUS_${customer}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 3 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+        const opt = { 
+            margin: 10, filename: `A1PLUS_Quotation_${customer}.pdf`, 
+            image: { type: 'jpeg', quality: 0.98 }, 
+            html2canvas: { scale: 3 }, 
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } 
+        };
         html2pdf().from(element).set(opt).save().then(() => element.style.display = 'none');
     }
 
-    function sendQuotationWA() {
-        const customer = document.getElementById('custName').value || "غير محدد";
+    function sendWhatsApp(customer) {
         let msg = `📄 *عرض سعر مبدئي - A1PLUS*\n`;
         msg += `--------------------------------------\n`;
-        msg += `👤 *العميل:* ${customer}\n`;
+        msg += `👤 *السادة:* ${customer}\n`;
         msg += `🗓️ *التاريخ:* ${new Date().toLocaleDateString('ar-SA')}\n`;
         msg += `--------------------------------------\n\n`;
         
-        quotation.forEach((item, i) => {
+        quoteItems.forEach((item, i) => {
             msg += `*${i+1}. ${item.name}*\n`;
             msg += `   📏 المقاس: ${item.size} | 🔢 الكمية: ${item.qty}\n`;
             msg += `------------------\n`;
         });
         
-        msg += `\n✅ *نأمل تزويدنا بتسعيرة لهذه الأصناف.*`;
+        msg += `\n✅ *يرجى مراجعة عرض السعر المرفق (PDF).*`;
         window.open(`https://wa.me/966534107070?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
