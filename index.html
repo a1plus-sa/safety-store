@@ -3,37 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر A1PLUS | نظام الفواتير</title>
+    <title>متجر A1PLUS | نظام عروض الأسعار</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root { --primary: #ffcc00; --bg: #000; --card: #121212; --white: #fff; }
-        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 120px; }
-        header { text-align: center; padding: 30px; border-bottom: 1px solid #333; }
-        .logo { width: 80px; height: 80px; border: 3px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 28px; font-weight: bold; color: var(--primary); }
+        body { background-color: var(--bg); color: var(--white); font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 150px; }
+        header { text-align: center; padding: 20px; border-bottom: 1px solid #333; }
+        .logo { width: 70px; height: 70px; border: 2px solid var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-size: 24px; font-weight: bold; color: var(--primary); }
         
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
-        .card { background: var(--card); border-radius: 15px; padding: 20px; text-align: center; border: 1px solid #222; width: 280px; }
-        .img-box { background: #fff; height: 180px; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        /* حقل اسم العميل */
+        .customer-info { padding: 20px 5%; text-align: center; }
+        .customer-info input { padding: 12px; width: 80%; max-width: 400px; border-radius: 8px; border: 1px solid var(--primary); background: #1a1a1a; color: #fff; text-align: center; font-size: 16px; }
+
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 10px 5%; }
+        .card { background: var(--card); border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #222; width: 260px; }
+        .img-box { background: #fff; height: 160px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .img-box img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
         .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; background: #1a1a1a; border: 1px solid var(--primary); padding: 5px; border-radius: 8px; width: fit-content; margin: 10px auto; }
         .q-btn { background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; width: 35px; font-weight: bold; }
-        .q-val { font-size: 18px; font-weight: bold; }
-
+        
         select { background: #222; color: #fff; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; width: 100%; margin-bottom: 10px; }
         .add-btn { background: var(--primary); color: #000; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
         
-        /* شريط السلة */
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 3px solid var(--primary); padding: 15px; display: none; justify-content: space-around; align-items: center; z-index: 1000; }
-        .btn-pdf { background: #e74c3c; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .btn-wa { background: #25d366; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        /* شريط عرض السعر السفلي */
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #1a1a1a; border-top: 3px solid var(--primary); padding: 15px; display: none; flex-direction: column; align-items: center; gap: 10px; z-index: 1000; }
+        .bar-buttons { display: flex; gap: 10px; width: 100%; justify-content: center; }
+        .btn-pdf { background: #e74c3c; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; max-width: 200px; }
+        .btn-wa { background: #25d366; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; max-width: 200px; }
 
-        /* تنسيق الفاتورة المخفية للـ PDF */
-        #invoice-print { display: none; padding: 50px; background: #fff; color: #000; direction: rtl; }
-        .inv-title { text-align: center; font-size: 24px; border-bottom: 2px solid #000; padding-bottom: 10px; }
-        .inv-table { width: 100%; border-collapse: collapse; margin-top: 30px; }
-        .inv-table th, .inv-table td { border: 1px solid #000; padding: 10px; text-align: center; }
-        .inv-table th { background: #f0f0f0; }
+        /* قالب عرض السعر للـ PDF */
+        #quotation-print { display: none; padding: 40px; background: #fff; color: #000; direction: rtl; }
+        .quo-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        .quo-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .quo-table th, .quo-table td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        .quo-table th { background: #f8f8f8; }
     </style>
 </head>
 <body>
@@ -41,8 +45,12 @@
 <header>
     <div class="logo">A1</div>
     <h1>A1PLUS</h1>
-    <p>فاتورة شراء إلكترونية لمعدات السلامة</p>
+    <p>معدات السلامة المهنية والحماية</p>
 </header>
+
+<div class="customer-info">
+    <input type="text" id="custName" placeholder="أدخل اسم العميل / المؤسسة">
+</div>
 
 <div class="container">
     <div class="card">
@@ -56,7 +64,7 @@
             <span class="q-val">1</span>
             <button class="q-btn" onclick="changeQty(this, -1, 1)">-</button>
         </div>
-        <button class="add-btn" onclick="addToCart(this)">إضافة للفاتورة</button>
+        <button class="add-btn" onclick="addToQuo(this)">إضافة لعرض السعر</button>
     </div>
 
     <div class="card">
@@ -68,41 +76,52 @@
             <span class="q-val">10</span>
             <button class="q-btn" onclick="changeQty(this, -10, 10)">-</button>
         </div>
-        <button class="add-btn" onclick="addToCart(this)">إضافة للفاتورة</button>
+        <button class="add-btn" onclick="addToQuo(this)">إضافة لعرض السعر</button>
     </div>
 </div>
 
 <div class="cart-bar" id="cartBar">
-    <button class="btn-pdf" onclick="generateInvoice()">تحميل فاتورة PDF 📄</button>
-    <button class="btn-wa" onclick="sendInvoiceWA()">إرسال فاتورة واتساب ✅</button>
+    <div id="cartStatus">تم إضافة أصناف لعرض السعر</div>
+    <div class="bar-buttons">
+        <button class="btn-pdf" onclick="generateQuotation()">تحميل عرض سعر PDF</button>
+        <button class="btn-wa" onclick="sendQuotationWA()">إرسال واتساب</button>
+    </div>
 </div>
 
-<div id="invoice-print">
-    <div class="inv-title">
-        <strong>فاتورة طلب شراء - A1PLUS</strong>
+<div id="quotation-print">
+    <div class="quo-header">
+        <div>
+            <h2>A1PLUS</h2>
+            <p>لمعدات السلامة المهنية</p>
+            <p>هاتف: 0534107070</p>
+        </div>
+        <div style="text-align: left;">
+            <h3>عرض سعر مبدئي</h3>
+            <p>التاريخ: <span id="q-date"></span></p>
+        </div>
     </div>
-    <div style="margin-top: 20px;">
-        <p>التاريخ: <span id="inv-date"></span></p>
-        <p>المتجر: A1PLUS لمعدات السلامة المهنية</p>
+    <div style="margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+        <strong>موجّه إلى السادة: </strong> <span id="q-cust"></span>
     </div>
-    <table class="inv-table">
+    <table class="quo-table">
         <thead>
             <tr>
-                <th>م</th>
+                <th>الرقم</th>
                 <th>اسم الصنف</th>
                 <th>المقاس</th>
                 <th>الكمية</th>
             </tr>
         </thead>
-        <tbody id="inv-items"></tbody>
+        <tbody id="quo-items"></tbody>
     </table>
-    <div style="margin-top: 50px; text-align: center;">
-        <p>هذه الفاتورة تم إنشاؤها إلكترونياً من متجر A1PLUS</p>
+    <div style="margin-top: 40px; font-size: 12px; color: #555;">
+        <p>* ملاحظة: هذا العرض ساري لمدة 7 أيام من تاريخه.</p>
+        <p>* تخضع الأسعار لتوفر المخزون عند الطلب الفعلي.</p>
     </div>
 </div>
 
 <script>
-    let cart = [];
+    let quotation = [];
 
     function changeQty(btn, val, min) {
         const display = btn.parentElement.querySelector('.q-val');
@@ -110,60 +129,53 @@
         if (current + val >= min) display.innerText = current + val;
     }
 
-    function addToCart(btn) {
+    function addToQuo(btn) {
         const card = btn.closest('.card');
         const name = card.querySelector('.p-name').innerText;
         const qty = card.querySelector('.q-val').innerText;
         const sizeEl = card.querySelector('.p-size');
         const size = sizeEl ? sizeEl.value : "جملة";
 
-        cart.push({ name, size, qty });
+        quotation.push({ name, size, qty });
         document.getElementById('cartBar').style.display = 'flex';
         
-        btn.innerText = "✓ أضيف للفاتورة";
-        btn.style.background = "#44ff44";
-        setTimeout(() => {
-            btn.innerText = "إضافة للفاتورة";
-            btn.style.background = "var(--primary)";
-        }, 800);
+        btn.innerText = "✓ تمت الإضافة";
+        setTimeout(() => { btn.innerText = "إضافة لعرض السعر"; }, 800);
     }
 
-    function generateInvoice() {
-        if (cart.length === 0) return;
-        const body = document.getElementById('inv-items');
-        document.getElementById('inv-date').innerText = new Date().toLocaleDateString('ar-SA');
+    function generateQuotation() {
+        const customer = document.getElementById('custName').value || "عميل محترم";
+        const body = document.getElementById('quo-items');
+        document.getElementById('q-date').innerText = new Date().toLocaleDateString('ar-SA');
+        document.getElementById('q-cust').innerText = customer;
+        
         body.innerHTML = "";
-        cart.forEach((item, index) => {
-            body.innerHTML += `<tr>
-                <td>${index + 1}</td>
-                <td>${item.name}</td>
-                <td>${item.size}</td>
-                <td>${item.qty}</td>
-            </tr>`;
+        quotation.forEach((item, index) => {
+            body.innerHTML += `<tr><td>${index + 1}</td><td>${item.name}</td><td>${item.size}</td><td>${item.qty}</td></tr>`;
         });
         
-        const element = document.getElementById('invoice-print');
+        const element = document.getElementById('quotation-print');
         element.style.display = 'block';
-        const opt = { margin: 10, filename: 'Invoice_A1PLUS.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 3 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+        const opt = { margin: 15, filename: `Quotation_A1PLUS_${customer}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 3 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
         html2pdf().from(element).set(opt).save().then(() => element.style.display = 'none');
     }
 
-    function sendInvoiceWA() {
-        if (cart.length === 0) return;
-        let invoiceMsg = "📋 *فاتورة طلب شراء - A1PLUS*\n";
-        invoiceMsg += "--------------------------------------\n";
-        invoiceMsg += `🗓️ التاريخ: ${new Date().toLocaleDateString('ar-SA')}\n`;
-        invoiceMsg += "--------------------------------------\n\n";
+    function sendQuotationWA() {
+        const customer = document.getElementById('custName').value || "غير محدد";
+        let msg = `📄 *عرض سعر مبدئي - A1PLUS*\n`;
+        msg += `--------------------------------------\n`;
+        msg += `👤 *العميل:* ${customer}\n`;
+        msg += `🗓️ *التاريخ:* ${new Date().toLocaleDateString('ar-SA')}\n`;
+        msg += `--------------------------------------\n\n`;
         
-        cart.forEach((item, i) => {
-            invoiceMsg += `*${i+1}. ${item.name}*\n`;
-            invoiceMsg += `   🔹 المقاس: ${item.size}\n`;
-            invoiceMsg += `   🔹 الكمية: ${item.qty}\n`;
-            invoiceMsg += "------------------\n";
+        quotation.forEach((item, i) => {
+            msg += `*${i+1}. ${item.name}*\n`;
+            msg += `   📏 المقاس: ${item.size} | 🔢 الكمية: ${item.qty}\n`;
+            msg += `------------------\n`;
         });
         
-        invoiceMsg += "\n📝 *يرجى مراجعة الفاتورة وتأكيد الطلب.*";
-        window.open(`https://wa.me/966534107070?text=${encodeURIComponent(invoiceMsg)}`, '_blank');
+        msg += `\n✅ *نأمل تزويدنا بتسعيرة لهذه الأصناف.*`;
+        window.open(`https://wa.me/966534107070?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
 </body>
